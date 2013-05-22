@@ -25,6 +25,7 @@ public class LoadingWindow extends JFrame {
 		getContentPane().add(lblLoading);
 		
 		setSize(450,120);
+		setResizable(false);
 		setVisible(true);
 		
 		new LoadingThread(this).run();
@@ -68,6 +69,11 @@ class LoadingThread extends Thread {
 		
 		frame.getLabel().setText("Verifying updates...");
 		frame.getProgressBar().setIndeterminate(true);
+		
+		frame.setVisible(false);
+		frame.dispose();
+		
+		new MainWindow();
 	}
 	
 	public void pause(long time) {
