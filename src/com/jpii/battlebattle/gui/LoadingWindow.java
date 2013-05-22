@@ -3,6 +3,7 @@ package com.jpii.battlebattle.gui;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class LoadingWindow extends JFrame {
 
@@ -19,11 +20,10 @@ public class LoadingWindow extends JFrame {
 		getContentPane().add(progressBar);
 
 		lblLoading = new JLabel("Loading...");
-		lblLoading.setBounds(183, 23, 54, 14);
+		lblLoading.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLoading.setBounds(10, 23, 414, 14);
 		getContentPane().add(lblLoading);
 		
-		progressBar.setIndeterminate(true);
-
 		setSize(450,120);
 		setVisible(true);
 		
@@ -48,21 +48,33 @@ class LoadingThread extends Thread {
 	}
 
 	public void run() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		
+		frame.getLabel().setText("Checking for BattleBattle updates...");
+		frame.getProgressBar().setIndeterminate(true);
+		
+		pause(1000);
+		
+		frame.getLabel().setText("Checking for game updates...");
+		frame.getProgressBar().setIndeterminate(true);
+		
+		pause(1000);
+		
+		frame.getLabel().setText("Downloading NavalBattle updates...");
+		frame.getProgressBar().setIndeterminate(false);
+		for(int x = 0; x <= 100; x++) {
+			frame.getProgressBar().setValue(x);
+			pause(20);
 		}
 		
-		frame.getProgressBar().setIndeterminate(false);
-		
-		for(int x = 0; x < 100; x++) {
-			frame.getProgressBar().setValue(x);
-			try {
-				sleep(20);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		frame.getLabel().setText("Verifying updates...");
+		frame.getProgressBar().setIndeterminate(true);
+	}
+	
+	public void pause(long time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 }
