@@ -70,6 +70,8 @@ class LoadingThread extends Thread {
 		frame.getLabel().setText("Verifying updates...");
 		frame.getProgressBar().setIndeterminate(true);
 		
+		pause(100);
+		
 		frame.setVisible(false);
 		frame.dispose();
 		
