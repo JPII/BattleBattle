@@ -7,6 +7,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.ListSelectionModel;
 
 public class MainWindow extends JFrame {
 
@@ -17,35 +23,50 @@ public class MainWindow extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerLocation(200);
+		splitPane.setEnabled(false);
+		splitPane.setDividerLocation(150);
 		splitPane.setBounds(0, 0, 444, 272);
 		getContentPane().add(splitPane);
 		
-		JPanel panel = new JPanel();
-		splitPane.setRightComponent(panel);
-		panel.setLayout(new MigLayout("", "[46px][189px][89px]", "[14px][14px][14px][23px]"));
+		JPanel detailsPanel = new JPanel();
+		splitPane.setRightComponent(detailsPanel);
+		detailsPanel.setLayout(new MigLayout("", "[46px,grow][189px][89px]", "[14px][14px][72.00px,fill][grow][fill][fill][53.00,grow][22.00px,grow]"));
 		
 		JLabel lblGameTitle = new JLabel("Game Title");
 		lblGameTitle.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel.add(lblGameTitle, "cell 0 0 3 1,growx,aligny top");
+		detailsPanel.add(lblGameTitle, "cell 0 0 3 1,growx,aligny top");
 		
 		JLabel lblVersion = new JLabel("version");
-		panel.add(lblVersion, "cell 0 1,growx,aligny top");
+		detailsPanel.add(lblVersion, "cell 0 1,growx,aligny top");
 		
-		JLabel lblLatestChanges = new JLabel("Latest changes...");
-		lblLatestChanges.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		panel.add(lblLatestChanges, "cell 0 2 3 1,growx,aligny top");
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		detailsPanel.add(scrollPane, "cell 0 2 3 5,grow");
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
+		scrollPane.setViewportView(textPane);
 		
 		JButton btnPlay = new JButton("Play");
-		panel.add(btnPlay, "cell 2 3,growx,aligny top");
+		detailsPanel.add(btnPlay, "cell 0 7 3 1,growx,aligny top");
 		
-		JPanel panel_1 = new JPanel();
-		splitPane.setLeftComponent(panel_1);
-		panel_1.setLayout(new MigLayout("", "[121px]", "[14px]"));
+		JPanel gamesPanel = new JPanel();
+		splitPane.setLeftComponent(gamesPanel);
+		gamesPanel.setLayout(new MigLayout("", "[121px,grow]", "[14px][grow]"));
 		
-		JLabel lblGamesGoHere = new JLabel("games go here...");
-		lblGamesGoHere.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		panel_1.add(lblGamesGoHere, "cell 0 0,growx,aligny top");
+		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"NavalBattle"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setSelectedIndex(0);
+		gamesPanel.add(list, "cell 0 0 1 2,grow");
 
 		setSize(450,300);
 		setResizable(false);

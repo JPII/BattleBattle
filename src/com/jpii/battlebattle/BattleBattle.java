@@ -15,6 +15,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.jpii.battlebattle.data.Constants;
 import com.jpii.battlebattle.gui.LoadingWindow;
+import com.jpii.battlebattle.io.BattleBattleIO;
 import com.jpii.gamekit.GameKit;
 import com.jpii.gamekit.debug.Debugger;
 import com.jpii.gamekit.exception.InvalidApiLevelException;
@@ -36,6 +37,8 @@ public class BattleBattle {
 		
 		if(Constants.DEBUG_MODE)
 			debugInstance.showDebugWindow();
+		
+		BattleBattleIO.run();
 		
 		debugInstance.printInfo("Opening LoadingWindow");
 		new LoadingWindow();
