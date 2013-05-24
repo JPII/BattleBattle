@@ -53,9 +53,16 @@ public class Game {
 	 * resolve any issues.
 	 * @return
 	 */
-	public boolean verifyGame() {
+	public boolean verify() {
 		// TODO
 		return true;
+	}
+	
+	/**
+	 * Attempts to launch the game.
+	 */
+	public void play() {
+		// TODO
 	}
 	
 	/**
@@ -96,5 +103,28 @@ public class Game {
 	 */
 	public String getDownloadUrl() {
 		return downloadUrl;
+	}
+	
+	/**
+	 * Creates directory for game install.
+	 */
+	private void createDirectory() {
+		// TODO
+	}
+	
+	/**
+	 * Clears directory for game install.
+	 * Will attempt to create the directory
+	 * if it doesn't exist.
+	 */
+	private void clearDirectory() {
+		// TODO
+	}
+	
+	/**
+	 * Attempts to backup game install.
+	 */
+	private void backup() {
+		// TODO
 	}
 }
