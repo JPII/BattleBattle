@@ -38,10 +38,11 @@ public class BattleBattleIO {
 			settings = new SettingsIO(getSettingsPath());
 			boolean res = true;
 			
-			// TODO: Create defaults here
+			// Create defaults here
+			res = settings.setAttribute(new SettingsAttribute("announcementId", "-2"));
 			
 			if (!res)
-				BattleBattle.getDebugger().printError("failed to write initial attributes");
+				BattleBattle.getDebugger().printError("Failed to write initial attributes");
 		}
 		else {
 			BattleBattle.getDebugger().printInfo("Loading config file");	
