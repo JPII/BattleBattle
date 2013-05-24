@@ -5,6 +5,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import com.jpii.battlebattle.io.ClientUpdateService;
+
 public class LoadingWindow extends JFrame {
 
 	private static final long serialVersionUID = -3989467303025155942L;
@@ -53,7 +55,9 @@ class LoadingThread extends Thread {
 		frame.getLabel().setText("Checking for BattleBattle updates...");
 		frame.getProgressBar().setIndeterminate(true);
 		
-		pause(1000);
+		new ClientUpdateService();
+		
+		pause(4000);
 		
 		frame.getLabel().setText("Checking for game updates...");
 		frame.getProgressBar().setIndeterminate(true);

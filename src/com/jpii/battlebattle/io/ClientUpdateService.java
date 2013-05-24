@@ -99,9 +99,11 @@ public class ClientUpdateService {
 	            parser.parse(new InputSource(new URL(Constants.UPDATE_URL).openStream()));
 	            Document doc = parser.getDocument();
 
-	            NodeList nodeList = doc.getElementsByTagName("string");
-	            for (int i = 0; i < nodeList.getLength(); i++) {	                
-	                Node n = nodeList.item(i);
+	            NodeList nodeList = doc.getElementsByTagName("battlebattle");
+	            NodeList values = nodeList.item(0).getChildNodes();
+	            
+	            for (int i = 0; i < values.getLength(); i++) {	                
+	                Node n = values.item(i);
 	                NamedNodeMap m = n.getAttributes();
 	                Node actualNode = n.getFirstChild();
 	               
