@@ -143,7 +143,7 @@ public class ClientUpdateService {
 	            }
 
 	        } catch (Exception ex) {
-	            BattleBattle.getDebugger().printError("BroadcastService encountered an error while downloading data");
+	            BattleBattle.getDebugger().printError("ClientUpdateService encountered an error while downloading data");
 	        }
 		}
 		
