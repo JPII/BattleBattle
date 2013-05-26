@@ -18,7 +18,7 @@ public class ClientUpdateService {
 	private String announcementId;
 	private BroadcastThread broadcastThread;
 	
-	/* Items from update.xml */
+	/* Items from versions.xml */
 	private String versionCode, versionReadable, updateText, updateUrl;
 	private String announcementCode, announcementTitle, announcementText, announcementUrl;
 	
