@@ -16,10 +16,10 @@ import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 public class GameUpdateService {
 
 	public GameUpdateService() {
-		parseXml();
+		loadOnlineGames();
 	}
 
-	private void parseXml() {			
+	private void loadOnlineGames() {			
 		DOMParser parser = new DOMParser();
 
 		try {
@@ -80,5 +80,7 @@ public class GameUpdateService {
 			BattleBattle.getDebugger().printError("GameUpdateService encountered an error while downloading data");
 			ex.printStackTrace();
 		}
+		
+		BattleBattle.getDebugger().printInfo(BattleBattle.getGameDatabase().getGames().size() + " game(s) loaded from online");
 	}
 }
