@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
@@ -14,11 +16,19 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 
+import com.jpii.battlebattle.io.ClientUpdateService;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+
 public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = -3989467303025155942L;
+	private ClientUpdateService clientUpdateService;
 	
-	public MainWindow() {
+	public MainWindow(final ClientUpdateService clientUpdateService) {
+		this.clientUpdateService = clientUpdateService;
+		
 		setTitle("BattleBattle");
 		getContentPane().setLayout(null);
 		
@@ -67,9 +77,57 @@ public class MainWindow extends JFrame {
 		});
 		list.setSelectedIndex(0);
 		gamesPanel.add(list, "cell 0 0 1 2,grow");
+		
+		JLabel alertTitle = new JLabel("Alert");
+		alertTitle.setFont(new Font("Tahoma", Font.BOLD, 11));
+		alertTitle.setBounds(10, 289, 325, 14);
+		getContentPane().add(alertTitle);
+		
+		JButton btnMoreInfo = new JButton("More info");
+		btnMoreInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(clientUpdateService.hasAnnouncement() && clientUpdateService.needsUpdate()) {
+					String[] options = new String[] {"Announcement", "Update"};
+				    int choice = JOptionPane.showOptionDialog(null, "Which alert do you wish to view?", "BattleBattle", 
+				        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+				        null, options, options[0]);
+				    
+				    if(choice == 0)
+				    	new BroadcastWindow(clientUpdateService.getAnnouncementTitle(), clientUpdateService.getAnnouncementText(), clientUpdateService.getAnnouncementUrl());
+				    if(choice == 1)
+				    	new UpdateWindow(clientUpdateService.getVersionReadable(), clientUpdateService.getUpdateText(), clientUpdateService.getUpdateUrl());
+				} else if(clientUpdateService.hasAnnouncement()) {
+					new BroadcastWindow(clientUpdateService.getAnnouncementTitle(), clientUpdateService.getAnnouncementText(), clientUpdateService.getAnnouncementUrl());
+				} else if(clientUpdateService.needsUpdate()) {
+					new UpdateWindow(clientUpdateService.getVersionReadable(), clientUpdateService.getUpdateText(), clientUpdateService.getUpdateUrl());
+				}
+			}
+		});
+		btnMoreInfo.setBounds(345, 283, 89, 27);
+		getContentPane().add(btnMoreInfo);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 270, 444, 2);
+		getContentPane().add(separator);
 
-		setSize(450,300);
+		if(clientUpdateService.hasAnnouncement() || clientUpdateService.needsUpdate()) {
+			setSize(450, 350);
+			if(clientUpdateService.hasAnnouncement() && clientUpdateService.needsUpdate()) {
+				alertTitle.setText("Update and Announcement");
+			} else if(clientUpdateService.hasAnnouncement()) {
+				alertTitle.setText("Announcement: " + clientUpdateService.getAnnouncementTitle());
+			} else if(clientUpdateService.needsUpdate()) {
+				alertTitle.setText("Update: BattleBattle " + clientUpdateService.getVersionReadable());
+			}
+		} else {
+			setSize(450, 300);
+		}
+		
 		setResizable(false);
 		setVisible(true);	
+	}
+	
+	public ClientUpdateService getClientUpdateService() {
+		return clientUpdateService;
 	}
 }
