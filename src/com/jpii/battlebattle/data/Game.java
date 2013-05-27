@@ -2,15 +2,24 @@ package com.jpii.battlebattle.data;
 
 public class Game {
 	
-	private String name, versionReadable, updateText, downloadUrl;
-	private int versionCode;
+	private String name, id, versionCode, versionReadable, description, downloadUrl;
 	
-	public Game(String name, int versionCode, String versionReadable, String updateText, String downloadUrl) {
+	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl) {
 		this.name = name;
+		this.id = id;
 		this.versionCode = versionCode;
 		this.versionReadable = versionReadable;
-		this.updateText = updateText;
+		this.description = description;
 		this.downloadUrl = downloadUrl;
+	}
+	
+	public Game(String[] values) {
+		this.name = values[0];
+		this.id = values[1];
+		this.versionCode = values[2];
+		this.versionReadable = values[3];
+		this.description = values[4];
+		this.downloadUrl = values[5];
 	}
 	
 	/**
@@ -74,10 +83,18 @@ public class Game {
 	}
 	
 	/**
+	 * Returns id of game.
+	 * @return
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	/**
 	 * Returns version code of game.
 	 * @return
 	 */
-	public int getVersionCode() {
+	public String getVersionCode() {
 		return versionCode;
 	}
 	
@@ -90,11 +107,11 @@ public class Game {
 	}
 	
 	/**
-	 * Returns update text for game.
+	 * Returns description for game.
 	 * @return
 	 */
-	public String getUpdateText() {
-		return updateText;
+	public String getDescription() {
+		return description;
 	}
 	
 	/**
@@ -126,5 +143,9 @@ public class Game {
 	 */
 	private void backup() {
 		// TODO
+	}
+	
+	public String toString() {
+		return "[" + name + ", " + id + ", " + versionCode + ", " + versionReadable + ", " + description + ", " + downloadUrl + "]";
 	}
 }

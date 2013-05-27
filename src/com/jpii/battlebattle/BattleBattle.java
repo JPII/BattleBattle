@@ -36,6 +36,7 @@ public class BattleBattle {
 		setDefaultLookAndFeel();
 		
 		debugInstance = new Debugger("BattleBattle");
+		gameDatabase = new GameDatabase();
 		
 		if(Constants.DEBUG_MODE)
 			debugInstance.showDebugWindow();

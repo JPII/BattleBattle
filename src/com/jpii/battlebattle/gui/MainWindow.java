@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 
+import com.jpii.battlebattle.BattleBattle;
 import com.jpii.battlebattle.io.ClientUpdateService;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -67,12 +68,11 @@ public class MainWindow extends JFrame {
 		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"NavalBattle"};
 			public int getSize() {
-				return values.length;
+				return BattleBattle.getGameDatabase().getGames().size();
 			}
 			public Object getElementAt(int index) {
-				return values[index];
+				return BattleBattle.getGameDatabase().getGame(index).getName();
 			}
 		});
 		list.setSelectedIndex(0);
