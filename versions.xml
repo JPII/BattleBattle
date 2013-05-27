@@ -15,9 +15,10 @@
 	<games>
 		<navalbattle>
 			<string name="game_name">NavalBattle</string>
+			<string name="game_id">1</string>
 			<string name="version_code">12</string>
 			<string name="version_readable">1.0</string>
-			<string name="update_text">NavalBattle 1.0 is here!</string>
+			<string name="description">NavalBattle 1.0 is here!</string>
 			<string name="download_url">https://github.com/JPII/NavalBattle/raw/master/current.jar</string>
 			<string name="hidden">0</string>
 		</navalbattle>
