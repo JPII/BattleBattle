@@ -14,6 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.jpii.battlebattle.data.Constants;
+import com.jpii.battlebattle.data.GameDatabase;
 import com.jpii.battlebattle.gui.LoadingWindow;
 import com.jpii.battlebattle.io.BattleBattleIO;
 import com.jpii.gamekit.GameKit;
@@ -23,6 +24,7 @@ import com.jpii.gamekit.exception.InvalidApiLevelException;
 public class BattleBattle {
 	
 	private static Debugger debugInstance;
+	private static GameDatabase gameDatabase;
 	
 	public static void main(String[] args) {
 		try {
@@ -48,6 +50,10 @@ public class BattleBattle {
 	
 	public static Debugger getDebugger() {
 		return debugInstance;
+	}
+	
+	public static GameDatabase getGameDatabase() {
+		return gameDatabase;
 	}
 	
 	/**
