@@ -64,7 +64,7 @@ class LoadingThread extends Thread {
 		frame.getProgressBar().setIndeterminate(true);
 		
 		// TODO
-		// gameUpdateService = new GameUpdateService();
+		gameUpdateService = new GameUpdateService();
 		pause(1000);
 		
 		frame.getLabel().setText("Downloading NavalBattle updates...");
@@ -81,11 +81,6 @@ class LoadingThread extends Thread {
 		
 		frame.setVisible(false);
 		frame.dispose();
-		
-		if(clientUpdateService.needsUpdate())
-			System.out.println("UPDATE!");
-		if(clientUpdateService.hasAnnouncement())
-			System.out.println("ANNOUNCEMENT!");
 		
 		new MainWindow(clientUpdateService);
 	}
