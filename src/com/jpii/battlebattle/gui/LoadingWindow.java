@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.jpii.battlebattle.io.ClientUpdateService;
+import com.jpii.battlebattle.io.GameUpdateService;
 
 public class LoadingWindow extends JFrame {
 
@@ -45,6 +46,8 @@ public class LoadingWindow extends JFrame {
 class LoadingThread extends Thread {
 	
 	private LoadingWindow frame;
+	private ClientUpdateService clientUpdateService;
+	private GameUpdateService gameUpdateService;
 	
 	public LoadingThread(LoadingWindow frame) {
 		this.frame = frame;
@@ -55,13 +58,13 @@ class LoadingThread extends Thread {
 		frame.getLabel().setText("Checking for BattleBattle updates...");
 		frame.getProgressBar().setIndeterminate(true);
 		
-		new ClientUpdateService();
-		
-		pause(4000);
-		
+		clientUpdateService = new ClientUpdateService();
+				
 		frame.getLabel().setText("Checking for game updates...");
 		frame.getProgressBar().setIndeterminate(true);
 		
+		// TODO
+		// gameUpdateService = new GameUpdateService();
 		pause(1000);
 		
 		frame.getLabel().setText("Downloading NavalBattle updates...");
@@ -79,7 +82,12 @@ class LoadingThread extends Thread {
 		frame.setVisible(false);
 		frame.dispose();
 		
-		new MainWindow();
+		if(clientUpdateService.needsUpdate())
+			System.out.println("UPDATE!");
+		if(clientUpdateService.hasAnnouncement())
+			System.out.println("ANNOUNCEMENT!");
+		
+		new MainWindow(clientUpdateService);
 	}
 	
 	public void pause(long time) {
