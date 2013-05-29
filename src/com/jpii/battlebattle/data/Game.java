@@ -3,6 +3,7 @@ package com.jpii.battlebattle.data;
 public class Game {
 	
 	private String name, id, versionCode, versionReadable, description, downloadUrl;
+	private GameType gameType;
 	
 	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl) {
 		this.name = name;
@@ -11,6 +12,17 @@ public class Game {
 		this.versionReadable = versionReadable;
 		this.description = description;
 		this.downloadUrl = downloadUrl;
+		gameType = GameType.OTHER;
+	}
+	
+	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl, GameType gameType) {
+		this.name = name;
+		this.id = id;
+		this.versionCode = versionCode;
+		this.versionReadable = versionReadable;
+		this.description = description;
+		this.downloadUrl = downloadUrl;
+		this.gameType = gameType;
 	}
 	
 	public Game(String[] values) {
@@ -20,6 +32,17 @@ public class Game {
 		this.versionReadable = values[3];
 		this.description = values[4];
 		this.downloadUrl = values[5];
+		gameType = GameType.OTHER;
+	}
+	
+	public Game(String[] values, GameType gameType) {
+		this.name = values[0];
+		this.id = values[1];
+		this.versionCode = values[2];
+		this.versionReadable = values[3];
+		this.description = values[4];
+		this.downloadUrl = values[5];
+		this.gameType = gameType;
 	}
 	
 	/**
@@ -122,6 +145,14 @@ public class Game {
 		return downloadUrl;
 	}
 	
+	public void setGameType(GameType gameType) {
+		this.gameType = gameType;
+	}
+	
+	public GameType getGameType() {
+		return gameType;
+	}
+	
 	/**
 	 * Creates directory for game install.
 	 */
@@ -146,6 +177,6 @@ public class Game {
 	}
 	
 	public String toString() {
-		return "[" + name + ", " + id + ", " + versionCode + ", " + versionReadable + ", " + description + ", " + downloadUrl + "]";
+		return "[" + name + ", " + id + ", " + versionCode + ", " + versionReadable + ", " + description + ", " + downloadUrl + "," + gameType + "]";
 	}
 }

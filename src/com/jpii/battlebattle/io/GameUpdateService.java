@@ -11,6 +11,7 @@ import org.xml.sax.InputSource;
 import com.jpii.battlebattle.BattleBattle;
 import com.jpii.battlebattle.data.Constants;
 import com.jpii.battlebattle.data.Game;
+import com.jpii.battlebattle.data.GameType;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 public class GameUpdateService {
@@ -71,7 +72,7 @@ public class GameUpdateService {
 				
 				try {
 					if(gameValues[6].equals("0")) {
-						BattleBattle.getGameDatabase().addGame(new Game(gameValues));
+						BattleBattle.getGameDatabase().addGame(new Game(gameValues, GameType.ONLINE));
 					}
 				} catch (Exception e) { }
 			}
