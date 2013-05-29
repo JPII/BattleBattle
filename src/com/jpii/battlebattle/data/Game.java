@@ -1,5 +1,9 @@
 package com.jpii.battlebattle.data;
 
+import java.io.File;
+
+import com.jpii.battlebattle.util.FileUtils;
+
 public class Game {
 	
 	private String name, id, versionCode, versionReadable, description, downloadUrl;
@@ -13,6 +17,8 @@ public class Game {
 		this.description = description;
 		this.downloadUrl = downloadUrl;
 		gameType = GameType.OTHER;
+		
+		createDirectory();
 	}
 	
 	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl, GameType gameType) {
@@ -23,6 +29,8 @@ public class Game {
 		this.description = description;
 		this.downloadUrl = downloadUrl;
 		this.gameType = gameType;
+		
+		createDirectory();
 	}
 	
 	public Game(String[] values) {
@@ -33,6 +41,8 @@ public class Game {
 		this.description = values[4];
 		this.downloadUrl = values[5];
 		gameType = GameType.OTHER;
+		
+		createDirectory();
 	}
 	
 	public Game(String[] values, GameType gameType) {
@@ -43,6 +53,8 @@ public class Game {
 		this.description = values[4];
 		this.downloadUrl = values[5];
 		this.gameType = gameType;
+		
+		createDirectory();
 	}
 	
 	/**
@@ -162,19 +174,45 @@ public class Game {
 	}
 	
 	/**
+	 * Returns directory name. The directory name
+	 * is only the name of the folder in which the
+	 * game is stored, not the entire path.
+	 * @return
+	 */
+	public String getDirectoryName() {
+		return "." + name.toLowerCase().replace(" ", "");
+	}
+	
+	/**
+	 * Returns directory in which the game is stored.
+	 * @return
+	 */
+	public File getDirectory() {
+		return new File(FileUtils.getSavingDirectory() + "/" + getDirectoryName());
+	}
+	
+	/**
 	 * Creates directory for game install.
 	 */
 	private void createDirectory() {
-		// TODO
+		getDirectory().mkdir();
+		
+		// TODO: Create manifest file to save version number, etc.
 	}
 	
 	/**
 	 * Clears directory for game install.
-	 * Will attempt to create the directory
-	 * if it doesn't exist.
 	 */
 	private void clearDirectory() {
-		// TODO
+		for (File f: getDirectory().listFiles()) f.delete();
+	}
+	
+	/**
+	 * Clears directory and deletes the directory.
+	 */
+	private void deleteDirectory() {
+		clearDirectory();
+		getDirectory().delete();
 	}
 	
 	/**
