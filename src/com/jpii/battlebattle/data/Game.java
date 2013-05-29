@@ -145,10 +145,18 @@ public class Game {
 		return downloadUrl;
 	}
 	
+	/**
+	 * Sets GameType.
+	 * @param gameType
+	 */
 	public void setGameType(GameType gameType) {
 		this.gameType = gameType;
 	}
 	
+	/**
+	 * Returns current GameType.
+	 * @return
+	 */
 	public GameType getGameType() {
 		return gameType;
 	}
