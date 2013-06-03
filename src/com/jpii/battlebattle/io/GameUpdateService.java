@@ -26,7 +26,6 @@ public class GameUpdateService {
 	private void loadLocalGames() {
 		for(File f : FileUtils.getSavingDirectory().listFiles()) {
 			if(f.isDirectory()) {
-				boolean isValid = true;
 				for(File gameFile : f.listFiles()) {
 					if(gameFile.getName().equals("config.ini")) {
 						// TODO: Load game info
