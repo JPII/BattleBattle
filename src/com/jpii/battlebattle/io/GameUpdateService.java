@@ -1,5 +1,6 @@
 package com.jpii.battlebattle.io;
 
+import java.io.File;
 import java.net.URL;
 
 import org.w3c.dom.Document;
@@ -12,12 +13,27 @@ import com.jpii.battlebattle.BattleBattle;
 import com.jpii.battlebattle.data.Constants;
 import com.jpii.battlebattle.data.Game;
 import com.jpii.battlebattle.data.GameType;
+import com.jpii.battlebattle.util.FileUtils;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 public class GameUpdateService {
 
 	public GameUpdateService() {
+		loadLocalGames();
 		loadOnlineGames();
+	}
+	
+	private void loadLocalGames() {
+		for(File f : FileUtils.getSavingDirectory().listFiles()) {
+			if(f.isDirectory()) {
+				boolean isValid = true;
+				for(File gameFile : f.listFiles()) {
+					if(gameFile.getName().equals("config.ini")) {
+						// TODO: Load game info
+					}
+				}
+			}
+		}
 	}
 
 	private void loadOnlineGames() {			

@@ -1,5 +1,8 @@
 package com.jpii.battlebattle.gui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
@@ -26,6 +29,12 @@ public class LoadingWindow extends JFrame {
 		lblLoading.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLoading.setBounds(10, 23, 414, 14);
 		getContentPane().add(lblLoading);
+		
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		setSize(450,120);
 		setResizable(false);
@@ -55,24 +64,32 @@ class LoadingThread extends Thread {
 
 	public void run() {
 		
+		// TODO: Loading sequence
+		// [X] Check for client updates
+		// [ ] Check for and register local games
+		// [X] Check for and register online games
+		// [ ] Pair local games with online games
+		// [ ] Check for paired game updates
+		// [ ] Update and verify games
+		
 		frame.getLabel().setText("Checking for BattleBattle updates...");
 		frame.getProgressBar().setIndeterminate(true);
 		
 		clientUpdateService = new ClientUpdateService();
+		
+		frame.getLabel().setText("Searching for installed games...");
+		frame.getProgressBar().setIndeterminate(true);
+		pause(1000);
+		
+		frame.getLabel().setText("Retrieving list of games from server...");
+		frame.getProgressBar().setIndeterminate(true);
+		pause(1000);
 				
 		frame.getLabel().setText("Checking for game updates...");
 		frame.getProgressBar().setIndeterminate(true);
 		
-		// TODO
 		gameUpdateService = new GameUpdateService();
 		pause(1000);
-		
-		frame.getLabel().setText("Downloading NavalBattle updates...");
-		frame.getProgressBar().setIndeterminate(false);
-		for(int x = 0; x <= 100; x++) {
-			frame.getProgressBar().setValue(x);
-			pause(20);
-		}
 		
 		frame.getLabel().setText("Verifying updates...");
 		frame.getProgressBar().setIndeterminate(true);
