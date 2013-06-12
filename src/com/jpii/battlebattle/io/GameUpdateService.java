@@ -14,6 +14,7 @@ import com.jpii.battlebattle.data.Constants;
 import com.jpii.battlebattle.data.Game;
 import com.jpii.battlebattle.data.GameType;
 import com.jpii.battlebattle.util.FileUtils;
+import com.jpii.battlebattle.util.GameConfigUtils;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 public class GameUpdateService {
@@ -28,7 +29,16 @@ public class GameUpdateService {
 			if(f.isDirectory()) {
 				for(File gameFile : f.listFiles()) {
 					if(gameFile.getName().equals("config.ini")) {
-						// TODO: Load game info
+						String[] gameValues = new String[7];
+						gameValues[0] = GameConfigUtils.getValue(gameFile, "game_name");
+						gameValues[1] = GameConfigUtils.getValue(gameFile, "game_id");
+						gameValues[2] = GameConfigUtils.getValue(gameFile, "version_code");
+						gameValues[3] = GameConfigUtils.getValue(gameFile, "version_readable");
+						gameValues[4] = GameConfigUtils.getValue(gameFile, "description");
+						gameValues[5] = GameConfigUtils.getValue(gameFile, "download_url");
+						gameValues[6] = "0";
+						
+						BattleBattle.getGameDatabase().addGame(new Game(gameValues, GameType.LOCAL));
 					}
 				}
 			}
@@ -97,6 +107,6 @@ public class GameUpdateService {
 			ex.printStackTrace();
 		}
 		
-		BattleBattle.getDebugger().printInfo(BattleBattle.getGameDatabase().getGames().size() + " game(s) loaded from online");
+		BattleBattle.getDebugger().printInfo(BattleBattle.getGameDatabase().getGames().size() + " game(s) loaded");
 	}
 }
