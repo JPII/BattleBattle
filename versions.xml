@@ -13,7 +13,7 @@
 	</battlebattle>
 	
 	<games>
-		<navalbattle>
+		<game>
 			<string name="game_name">NavalBattle</string>
 			<string name="game_id">1</string>
 			<string name="version_code">12</string>
@@ -21,9 +21,9 @@
 			<string name="description">NavalBattle 1.0 is here!</string>
 			<string name="download_url">https://github.com/JPII/NavalBattle/raw/master/current.jar</string>
 			<string name="hidden">0</string>
-		</navalbattle>
+		</game>
 		
-		<navalbattle>
+		<game>
 			<string name="game_name">Test Game</string>
 			<string name="game_id">2</string>
 			<string name="version_code">1</string>
@@ -31,6 +31,6 @@
 			<string name="description">This is a test.</string>
 			<string name="download_url">https://github.com/JPII/NavalBattle/raw/master/current.jar</string>
 			<string name="hidden">0</string>
-		</navalbattle>
+		</game>
 	</games>
 </versions>
