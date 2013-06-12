@@ -28,7 +28,7 @@ public class GameUpdateService {
 		for(File f : FileUtils.getSavingDirectory().listFiles()) {
 			if(f.isDirectory()) {
 				for(File gameFile : f.listFiles()) {
-					if(gameFile.getName().equals("config.ini")) {
+					if(gameFile.getName().equals("manifest.ini")) {
 						String[] gameValues = new String[7];
 						gameValues[0] = GameConfigUtils.getValue(gameFile, "game_name");
 						gameValues[1] = GameConfigUtils.getValue(gameFile, "game_id");
