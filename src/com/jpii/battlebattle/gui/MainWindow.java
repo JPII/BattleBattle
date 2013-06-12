@@ -17,6 +17,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 
 import com.jpii.battlebattle.BattleBattle;
+import com.jpii.battlebattle.data.Game;
 import com.jpii.battlebattle.io.ClientUpdateService;
 
 import java.awt.event.ActionListener;
@@ -25,6 +26,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JSeparator;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class MainWindow extends JFrame {
 
@@ -47,20 +50,20 @@ public class MainWindow extends JFrame {
 		splitPane.setRightComponent(detailsPanel);
 		detailsPanel.setLayout(new MigLayout("", "[46px,grow][189px][89px]", "[14px][14px][72.00px,fill][grow][fill][fill][53.00,grow][22.00px,grow]"));
 		
-		JLabel lblGameTitle = new JLabel("Game Title");
+		final JLabel lblGameTitle = new JLabel("Game Title");
 		lblGameTitle.setFont(new Font("Tahoma", Font.BOLD, 11));
 		detailsPanel.add(lblGameTitle, "cell 0 0 3 1,growx,aligny top");
 		
-		JLabel lblVersion = new JLabel("version");
+		final JLabel lblVersion = new JLabel("version");
 		detailsPanel.add(lblVersion, "cell 0 1,growx,aligny top");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		detailsPanel.add(scrollPane, "cell 0 2 3 5,grow");
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		scrollPane.setViewportView(textPane);
+		final JTextPane descriptionPane = new JTextPane();
+		descriptionPane.setEditable(false);
+		scrollPane.setViewportView(descriptionPane);
 		
 		JButton btnPlay = new JButton("Play");
 		detailsPanel.add(btnPlay, "cell 0 7 3 1,growx,aligny top");
@@ -78,6 +81,15 @@ public class MainWindow extends JFrame {
 			public Object getElementAt(int index) {
 				return BattleBattle.getGameDatabase().getGame(index).getName();
 			}
+		});
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+		      public void valueChanged(ListSelectionEvent listSelectionEvent) {
+		    	  Game selectedGame = BattleBattle.getGameDatabase().getGame(listSelectionEvent.getFirstIndex());
+		    	  lblGameTitle.setText(selectedGame.getName());
+		    	  lblVersion.setText(selectedGame.getVersionReadable());
+		    	  descriptionPane.setText(selectedGame.getDescription());
+		      }
 		});
 		list.setSelectedIndex(0);
 		gamesPanel.add(list, "cell 0 0 1 2,grow");
