@@ -68,7 +68,7 @@ class LoadingThread extends Thread {
 		// [X] Check for client updates
 		// [X] Check for and register local games
 		// [X] Check for and register online games
-		// [ ] Pair local games with online games
+		// [X] Pair local games with online games
 		// [ ] Check for paired game updates
 		// [ ] Update and verify games
 		

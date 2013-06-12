@@ -11,6 +11,13 @@ public class GameDatabase {
 	}
 	
 	public void addGame(Game game) {
+		for(Game g : getGames()) {
+			if(g.getId().equals(game.getId())) {
+				g.setGameType(GameType.ONLINE);
+				return;
+			}
+		}
+		
 		games.add(game);
 	}
 	
