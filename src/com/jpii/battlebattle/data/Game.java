@@ -6,28 +6,30 @@ import com.jpii.battlebattle.util.FileUtils;
 
 public class Game {
 	
-	private String name, id, versionCode, versionReadable, description, downloadUrl;
+	private String name, id, versionCode, versionReadable, description, downloadUrl, md5Hash;
 	private GameType gameType;
 	
-	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl) {
+	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl, String md5Hash) {
 		this.name = name;
 		this.id = id;
 		this.versionCode = versionCode;
 		this.versionReadable = versionReadable;
 		this.description = description;
 		this.downloadUrl = downloadUrl;
+		this.md5Hash = md5Hash;
 		gameType = GameType.OTHER;
 		
 		createDirectory();
 	}
 	
-	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl, GameType gameType) {
+	public Game(String name, String id, String versionCode, String versionReadable, String description, String downloadUrl, String md5Hash, GameType gameType) {
 		this.name = name;
 		this.id = id;
 		this.versionCode = versionCode;
 		this.versionReadable = versionReadable;
 		this.description = description;
 		this.downloadUrl = downloadUrl;
+		this.md5Hash = md5Hash;
 		this.gameType = gameType;
 		
 		createDirectory();
@@ -40,6 +42,7 @@ public class Game {
 		this.versionReadable = values[3];
 		this.description = values[4];
 		this.downloadUrl = values[5];
+		this.md5Hash = values[7];
 		gameType = GameType.OTHER;
 		
 		createDirectory();
@@ -52,6 +55,7 @@ public class Game {
 		this.versionReadable = values[3];
 		this.description = values[4];
 		this.downloadUrl = values[5];
+		this.md5Hash = values[7];
 		this.gameType = gameType;
 		
 		createDirectory();
@@ -155,6 +159,23 @@ public class Game {
 	 */
 	public String getDownloadUrl() {
 		return downloadUrl;
+	}
+	
+	/**
+	 * Set md5 hash of game. Use with caution.
+	 * @param md5Hash
+	 * @return
+	 */
+	public void setMd5Hash(String md5Hash) {
+		this.md5Hash = md5Hash;
+	}
+	
+	/**
+	 * Get current md5 hash of game for verification purposes.
+	 * @return
+	 */
+	public String getMd5Hash() {
+		return md5Hash;
 	}
 	
 	/**

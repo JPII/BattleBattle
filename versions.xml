@@ -21,6 +21,7 @@
 			<string name="description">NavalBattle 1.0 is here!</string>
 			<string name="download_url">https://github.com/JPII/NavalBattle/raw/master/current.jar</string>
 			<string name="hidden">0</string>
+			<string name="md5_hash">something</string>
 		</game>
 		
 		<game>
@@ -31,6 +32,7 @@
 			<string name="description">This is a test.</string>
 			<string name="download_url">https://github.com/JPII/NavalBattle/raw/master/current.jar</string>
 			<string name="hidden">0</string>
+			<string name="md5_hash">something</string>
 		</game>
 	</games>
 </versions>

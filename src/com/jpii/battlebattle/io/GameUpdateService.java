@@ -29,7 +29,7 @@ public class GameUpdateService {
 			if(f.isDirectory()) {
 				for(File gameFile : f.listFiles()) {
 					if(gameFile.getName().equals("manifest.ini")) {
-						String[] gameValues = new String[7];
+						String[] gameValues = new String[8];
 						gameValues[0] = GameConfigUtils.getValue(gameFile, "game_name");
 						gameValues[1] = GameConfigUtils.getValue(gameFile, "game_id");
 						gameValues[2] = GameConfigUtils.getValue(gameFile, "version_code");
@@ -37,6 +37,7 @@ public class GameUpdateService {
 						gameValues[4] = GameConfigUtils.getValue(gameFile, "description");
 						gameValues[5] = GameConfigUtils.getValue(gameFile, "download_url");
 						gameValues[6] = "0";
+						gameValues[7] = GameConfigUtils.getValue(gameFile, "hd5_hash");
 						
 						BattleBattle.getGameDatabase().addGame(new Game(gameValues, GameType.LOCAL));
 					}
@@ -58,7 +59,7 @@ public class GameUpdateService {
 			for(int i = 0; i < games.getLength(); i++) {	                
 				Node n = games.item(i);
 				
-				String[] gameValues = new String[7];
+				String[] gameValues = new String[8];
 				for(int k = 0; k < n.getChildNodes().getLength(); k++) {
 					Node node = n.getChildNodes().item(k);
 					NamedNodeMap m = node.getAttributes();
@@ -91,6 +92,10 @@ public class GameUpdateService {
 						
 						if(m.getNamedItem("name").getTextContent().equals("hidden")) {
 							gameValues[6] = actualNode.getNodeValue();
+						}
+						
+						if(m.getNamedItem("name").getTextContent().equals("md5_hash")) {
+							gameValues[7] = actualNode.getNodeValue();
 						}
 					} catch (Exception e) { }
 				}
